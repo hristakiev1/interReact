@@ -13,11 +13,20 @@ const Movies = () => {
     { path: "seen", name: "Seen" },
     { path: "rating", name: "Rate" },
     { path: "button", name: "" },
+    { path: "like", name: "Liked" },
   ];
 
   const handleDelete = (deleteMovie) => {
     const newMovieList = movies.filter((movie) => movie !== deleteMovie);
     setMovies(newMovieList);
+  };
+
+  const handleIcon = (movie) => {
+    let moviesArray = [...movies];
+    let movieIndex = moviesArray.indexOf(movie);
+    moviesArray[movieIndex].like = !moviesArray[movieIndex].like;
+
+    setMovies(moviesArray);
   };
 
   useEffect(() => {
@@ -28,8 +37,16 @@ const Movies = () => {
 
   return (
     <div>
-      <h1>Currently there are {movies.length} in the list</h1>
-      <Table movies={movies} columns={columns} onDelete={handleDelete} />
+      <h1>
+        Currently there are {movies.length} in the list
+        <i className="fa fa-heart" aria-hidden="true" />
+      </h1>
+      <Table
+        movies={movies}
+        columns={columns}
+        onDelete={handleDelete}
+        handleIcon={handleIcon}
+      />
 
       {/* <Calc /> */}
     </div>

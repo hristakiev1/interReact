@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
-const TableBody = ({ movies, columns, onDelete }) => {
+const TableBody = ({ movies, columns, onDelete, handleIcon }) => {
+  const renderIcon = (movie) => {
+    let icon = "fa fa-";
+
+    movie.like ? (icon += "heartbeat") : (icon += "heart");
+
+    return (
+      <i
+        className={icon}
+        aria-hidden="true"
+        onClick={() => handleIcon(movie)}
+      />
+    );
+  };
+
   const renderCell = (column, movie, indx) => {
     if (column.path == "image") {
       return (
@@ -26,6 +40,8 @@ const TableBody = ({ movies, columns, onDelete }) => {
         </td>
       );
     }
+    if (column.path === "like")
+      return <td key={indx + movie._id}>{renderIcon(movie)}</td>;
 
     return <td key={indx + movie._id}>{movie[column.path]}</td>;
   };
