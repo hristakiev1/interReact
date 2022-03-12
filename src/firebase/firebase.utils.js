@@ -72,38 +72,38 @@ export const deleteDocument = async (collection, item) => {
 // User Authentication
 
 // Auth with Google Sign In
-export const auth = firebase.auth();
+// export const auth = firebase.auth();
 
-var provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({
-  prompt: "select_account",
-});
+// var provider = new firebase.auth.GoogleAuthProvider();
+// provider.setCustomParameters({
+//   prompt: "select_account",
+// });
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+// export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-export default firebase;
+// export default firebase;
 
-//Create User Profile Document
+// //Create User Profile Document
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
-  const userDocumentRef = firestore.doc(`/users/${userAuth.uid}`);
-  const snapShot = await userDocumentRef.get();
+// export const createUserProfileDocument = async (userAuth, additionalData) => {
+//   if (!userAuth) return;
+//   const userDocumentRef = firestore.doc(`/users/${userAuth.uid}`);
+//   const snapShot = await userDocumentRef.get();
 
-  if (!snapShot.exists) {
-    const { displayName, email } = userAuth;
-    const createAt = new Date();
-    try {
-      await userDocumentRef.set({
-        displayName,
-        email,
-        createAt,
-        ...additionalData,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }
+//   if (!snapShot.exists) {
+//     const { displayName, email } = userAuth;
+//     const createAt = new Date();
+//     try {
+//       await userDocumentRef.set({
+//         displayName,
+//         email,
+//         createAt,
+//         ...additionalData,
+//       });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
 
-  return userDocumentRef;
-};
+//   return userDocumentRef;
+// };
